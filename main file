@@ -1,0 +1,67 @@
+import random
+
+divider = "⋆⋆⋆⋆⋆⋆⋆⋆⋆⋆⋆"
+print("FIND THE PERFECT COLOR PALETTE!")
+print("MADE BY: Regina Emilie")
+print(divider)
+name = input("Hello, please enter you're name: ")
+print(divider)
+generate_color = input("Wanna generate a random color? ")
+
+class hsb:
+  def __init__(self, h=None, s=None, b=None):
+    self.h = h
+    self.s = s
+    self.b = b
+
+  def get_secondary(self):
+    random_five_to_ten = random.randint(5, 10)
+    random_ninetyfive_onehundred = random.randint(95, 100)
+    sec_s = random_five_to_ten
+    sec_b = random_ninetyfive_onehundred
+    
+    return hsb(self.h, sec_s, sec_b)
+
+  def get_tertiary(self):
+    random_thirty_forty = random.randint(30, 40)
+    ter_h = self.h + random_thirty_forty
+    random_five_ten = random.randint(5, 10)
+    ter_b = self.b + random_five_ten
+    
+    return hsb(ter_h, self.s, ter_b)
+
+  def get_color_palette(self):
+    secondary = self.get_secondary()
+    tertiary = self.get_tertiary()
+
+    print(divider)
+    print('*drumroll*')
+    print('Your color palette is...')
+    print('primary: hsb({h}, {s}, {b})'.format(h=self.h, s=self.s, b=self.b))
+    print('secondary: hsb({h}, {s}, {b})'.format(h=secondary.h, s=secondary.s, b=secondary.b))
+    print('tertiary: hsb({h}, {s}, {b})'.format(h=tertiary.h, s=tertiary.s, b=tertiary.b))
+
+  def generate_color(self):
+    random_h_zero_threehundredsixty = random.randint(0, 360)
+    random_s_zero_onehundred = random.randint(0, 100)
+    random_b_zero_onehundred = random.randint(0, 100)
+    self.h = random_h_zero_threehundredsixty
+    self.s = random_s_zero_onehundred
+    self.b = random_b_zero_onehundred
+
+    print(divider)
+    print("Color wheel spinning...")
+    print("You've got hsb({h}, {s}, {b})".format(h=self.h, s=self.s, b=self.b))
+
+def generate_color_and_palette(generate_color):
+  if generate_color == 'Yes' or generate_color == 'yes':
+    primary = hsb()
+    primary.generate_color()
+    print(divider)
+    generate_palette = input('Generate color palette? ')
+    if generate_palette == 'Yes' or generate_palette == 'yes':
+      primary.get_color_palette()
+
+generate_color_and_palette(generate_color)
+print(divider)
+print('Thanks for stopping by ' + name + '!')
